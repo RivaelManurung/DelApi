@@ -4,7 +4,8 @@ use App\Http\Controllers\Auth\AuthenticationController;
 use App\Http\Controllers\Feed\FeedController;
 use App\Http\Controllers\IzinKeluar\IzinKeluarController;
 use App\Http\Controllers\Surat\SuratController;
-
+use App\Http\Controllers\Booking\BookingController;
+use App\Http\Controllers\Ruangan\RuanganController;
 use App\Models\Surat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,10 +27,20 @@ Route::post('/feed/like/{feed_id}', [FeedController::class, 'likePost'])->middle
 Route::post('/feed/comment/{feed_id}', [FeedController::class, 'comment'])->middleware('auth:sanctum');
 Route::get('/feed/comments/{feed_id}', [FeedController::class, 'getComments'])->middleware('auth:sanctum');
 
-
+//izinKeluar
 Route::get('/izins', [IzinKeluarController::class, 'index'])->middleware('auth:sanctum');
 Route::post('/izin/store', [IzinKeluarController::class, 'store'])->middleware('auth:sanctum');
+Route::delete('/izin/delete/{id}', [IzinKeluarController::class, 'destroy'])->middleware('auth:sanctum');
 
+//Booking Ruangan
+Route::get('/bookings', [BookingController::class, 'index'])->middleware('auth:sanctum');
+Route::post('/booking/store', [BookingController::class, 'store'])->middleware('auth:sanctum');
+Route::delete('/booking/delete/{id}', [BookingController::class, 'destroy'])->middleware('auth:sanctum');
+
+//Ruangan
+Route::get('/ruangans', [RuanganController::class, 'index'])->middleware('auth:sanctum');
+Route::post('/ruangan/store', [RuanganController::class, 'store'])->middleware('auth:sanctum');
+Route::get('/ruangan/{id}', [RuanganController::class, 'getById'])->middleware('auth:sanctum');
 
 
 Route::get('/surats', [SuratController::class, 'index'])->middleware('auth:sanctum');

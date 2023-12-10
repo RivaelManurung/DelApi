@@ -16,14 +16,17 @@ class AuthenticationController extends Controller
         $request->validated();
 
         $userData = [
+            'nomor_ktp' => $request->nomor_ktp,
+            'nim' => $request->nim,
+            'nama_lengkap' => $request->nama_lengkap,
+            'nomor_handphone' => $request->nomor_handphone,
             'name' => $request->name,
-            'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ];
 
         $user = User::create($userData);
-        $token = $user->createToken('forumapp')->plainTextToken;
+        $token = $user->createToken('delapi')->plainTextToken;
 
         return response([
             'user' => $user,
@@ -35,20 +38,21 @@ class AuthenticationController extends Controller
     {
         $request->validated();
 
-        $user = User::whereUsername($request->username)->first();
+        $user = User::whereName($request->name)->first();
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response([
                 'message' => 'Invalid credentials'
             ], 422);
         }
 
-        $token = $user->createToken('forumapp')->plainTextToken;
+        $token = $user->createToken('delapi')->plainTextToken;
 
         return response([
             'user' => $user,
             'token' => $token
         ], 200);
     }
+
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();

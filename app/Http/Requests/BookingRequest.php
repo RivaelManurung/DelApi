@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class BookingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,19 +13,21 @@ class LoginRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return true; // Sesuaikan dengan kebijakan otorisasi Anda
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, mixed>
+     * @return array
      */
     public function rules()
     {
         return [
-            'name' => 'required|string|min:4',
-            'password' => 'required|min:6',
+            'nama_kegiatan' => 'required',
+            'rencana_peminjaman' => 'required|date',
+            'rencana_berakhir' => 'required|date',
+            'ruangan_id' => 'required|exists:ruangans,id',
         ];
     }
 }

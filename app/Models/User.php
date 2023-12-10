@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,8 +19,11 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'nomor_ktp',
+        'nim',
+        'nama_lengkap',
+        'nomor_handphone',
         'name',
-        'username',
         'email',
         'password',
     ];
@@ -53,13 +56,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+
     public function surats(): HasMany
     {
         return $this->hasMany(Surat::class);
     }
+
     public function izinkeluar(): HasMany
     {
         return $this->hasMany(IzinKeluar::class);
     }
-
 }

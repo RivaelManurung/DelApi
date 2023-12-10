@@ -24,8 +24,11 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
+            'nomor_ktp' => 'required', 
+            'nim' => 'required', 
+            'nama_lengkap' => 'required|min:3', 
+            'nomor_handphone' => 'required', 
             'name' => 'required|min:3',
-            'username' => 'required|string|min:4|unique:users',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
         ];

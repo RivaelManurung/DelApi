@@ -5,7 +5,6 @@ namespace App\Http\Controllers\IzinKeluar;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\IzinKeluarRequest;
 use App\Models\IzinKeluar;
-use Illuminate\Http\Request;
 
 class IzinKeluarController extends Controller
 {
@@ -30,5 +29,22 @@ class IzinKeluarController extends Controller
         return response([
             'message' => 'Izin keluar berhasil diajukan.',
         ], 201);
+    }
+
+    public function destroy($id)
+    {
+        $izin = IzinKeluar::find($id);
+
+        if (!$izin) {
+            return response([
+                'message' => 'Izin keluar tidak ditemukan.',
+            ], 404);
+        }
+
+        $izin->delete();
+
+        return response([
+            'message' => 'Izin keluar berhasil dihapus.',
+        ], 200);
     }
 }
