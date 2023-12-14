@@ -16,6 +16,7 @@ class RuanganController extends Controller
      */
     public function index()
     {
+        
         // Mengambil semua ruangan
         $ruangans = Ruangan::all();
 

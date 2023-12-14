@@ -12,7 +12,8 @@ class izinbemalamController extends Controller
 {
     public function index()
     {
-        $izinBermalam = IzinBermalam::with('user')->latest()->get();
+        $izinBermalam = auth()->user()->izinbermalam()->with('user')->latest()->get();
+
         return response([
             'izinBermalam' => $izinBermalam
         ], 200);

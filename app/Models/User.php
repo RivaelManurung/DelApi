@@ -47,15 +47,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function feeds(): HasMany
-    {
-        return $this->hasMany(Feed::class);
-    }
-
-    public function comments(): HasMany
-    {
-        return $this->hasMany(Comment::class);
-    }
 
     public function surats(): HasMany
     {
@@ -67,7 +58,21 @@ class User extends Authenticatable
         return $this->hasMany(IzinKeluar::class);
     }
     public function baak()
-{
-    return $this->hasOne(Baak::class);
-}
+    {
+        return $this->hasOne(Baak::class);
+    }
+    public function izinBermalam(): HasMany
+    {
+        return $this->hasMany(IzinBermalam::class);
+    }
+
+    public function pembelian_kaos(): HasMany
+    {
+        return $this->hasMany(pembelian_kaos::class);
+    }
+    
+    public function bookings(): HasMany
+    {
+        return $this->hasMany(Booking::class);
+    }
 }

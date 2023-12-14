@@ -49,15 +49,8 @@ class Baak extends Model implements Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function feeds(): HasMany
-    {
-        return $this->hasMany(Feed::class);
-    }
 
-    public function comments(): HasMany
-    {
-        return $this->hasMany(Comment::class);
-    }
+
 
     public function surats(): HasMany
     {

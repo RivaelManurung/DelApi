@@ -8,14 +8,16 @@ use App\Models\IzinKeluar;
 
 class IzinKeluarController extends Controller
 {
+
     public function index()
     {
-        $izins = IzinKeluar::with('user')->latest()->get();
+        // Mendapatkan izin keluar hanya untuk pengguna yang sedang login
+        $izins = auth()->user()->izinkeluar()->with('user')->latest()->get();
+
         return response([
             'izins' => $izins
         ], 200);
     }
-
     public function store(IzinKeluarRequest $request)
     {
         $request->validated();

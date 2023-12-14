@@ -13,7 +13,8 @@ class SuratController extends Controller
 
     public function index()
     {
-        $surats = Surat::with('user')->latest()->get();
+        $surats = auth()->user()->surats()->with('user')->latest()->get();
+
         return response([
             'surats' => $surats
         ], 200);

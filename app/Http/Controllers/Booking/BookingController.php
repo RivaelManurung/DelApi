@@ -13,11 +13,11 @@ class BookingController extends Controller
 {
     public function index()
     {
-        // Mengambil semua booking
-        $bookings = Booking::with('user', 'ruangan')->get();
+        
+        $userBookings = Auth::user()->bookings()->with('user', 'ruangan')->get();
 
         return response([
-            'bookings' => $bookings
+            'bookings' => $userBookings
         ], 200);
     }
 
