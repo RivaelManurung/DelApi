@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class Baak extends Model implements Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable,AuthenticatableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -19,6 +20,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'user_id',
         'nomor_ktp',
         'nim',
         'nama_lengkap',
@@ -66,8 +68,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(IzinKeluar::class);
     }
-    public function baak()
-{
-    return $this->hasOne(Baak::class);
-}
+    public function user()
+    {
+        return $this->belongsTo(User::class); // Example relationship to User model
+    }
+    
 }

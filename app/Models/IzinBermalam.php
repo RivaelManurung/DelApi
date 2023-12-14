@@ -6,20 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Comment extends Model
+class IzinBermalam extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'user_id',
-        'feed_id',
-        'body'
+        'content',
+        'rencana_berangkat',
+        'rencana_kembali',
+        'approved',
     ];
-
-    public function feed(): BelongsTo
-    {
-        return $this->belongsTo(Feed::class);
-    }
+    protected $casts = [
+        'approved' => 'boolean',
+    ];
 
     public function user(): BelongsTo
     {

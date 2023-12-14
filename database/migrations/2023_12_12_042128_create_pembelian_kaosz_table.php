@@ -8,29 +8,25 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('pembelian_kaos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('feed_id');
-            $table->foreign('feed_id')->references('id')->on('feeds');
-            $table->text('body');
+            $table->string('price')->nullable();
+            $table->enum('size', ['S', 'M', 'L','XL','XXL']);
+            $table->boolean('approved')->default(false);
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('pembelian_kaos');
     }
 };

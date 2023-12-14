@@ -15,6 +15,7 @@ class Booking extends Model
         'rencana_peminjaman',
         'rencana_berakhir',
         'ruangan_id',
+        'status',
     ];
 
     protected $casts = [

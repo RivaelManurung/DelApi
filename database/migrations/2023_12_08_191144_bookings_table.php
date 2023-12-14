@@ -21,8 +21,10 @@ return new class extends Migration
             $table->dateTime('rencana_berakhir');
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrent();
-            $table->string('status')->default('pending');
-            $table->foreignId('ruangan_id')->constrained(); // Sesuaikan dengan tabel ruangan Anda
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->foreignId('ruangan_id')->constrained(); // Adjust based on your 'ruangan' table
+            $table->foreignId('baak_id')->nullable()->constrained('baaks');
+
         });
     }
 

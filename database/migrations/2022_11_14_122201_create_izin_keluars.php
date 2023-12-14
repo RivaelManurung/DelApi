@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('content');
             $table->dateTime('rencana_berangkat');
             $table->dateTime('rencana_kembali');
-            $table->boolean('approved')->default(false);
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }
