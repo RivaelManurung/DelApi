@@ -12,7 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Baak extends Model implements Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable,AuthenticatableTrait;
+    use HasApiTokens, HasFactory, Notifiable, AuthenticatableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -65,5 +65,8 @@ class Baak extends Model implements Authenticatable
     {
         return $this->belongsTo(User::class); // Example relationship to User model
     }
-    
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
 }

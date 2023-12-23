@@ -74,6 +74,14 @@ Route::post('baak/register', [BaakController::class, 'register']);
 Route::post('baak/logout', [BaakController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::prefix('baak')->group(function () {
+    //booking
     Route::get('bookings', [BaakBookingController::class, 'getAllBookings']);
+    Route::get('ruangan/{id}', [RuanganController::class, 'getById'])->middleware('auth:sanctum');
+
+    //izin keluar
+    Route::get('izinsadmin', [IzinKeluarController::class, 'getAllIzinKeluar'])->middleware('auth:sanctum');
+    Route::put('izinkeluar/{id}/status/{status}', [IzinKeluarController::class, 'updateStatus'])->middleware('auth:sanctum');
+    Route::get('izins', [IzinKeluarController::class, 'index'])->middleware('auth:sanctum');
+
     // Add other baak-related routes if needed
 });

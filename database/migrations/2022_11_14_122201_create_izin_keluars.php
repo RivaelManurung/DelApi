@@ -20,6 +20,8 @@ return new class extends Migration
             $table->text('content');
             $table->dateTime('rencana_berangkat');
             $table->dateTime('rencana_kembali');
+            $table->unsignedBigInteger('baak_id')->nullable(); // Tambahkan kolom 'baak_id'
+            $table->foreign('baak_id')->references('id')->on('baaks')->onDelete('set null'); // Sesuaikan dengan nama tabel 'baaks'
             $table->string('status')->default('pending');
             $table->timestamps();
         });

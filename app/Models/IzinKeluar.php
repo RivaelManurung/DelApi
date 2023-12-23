@@ -26,4 +26,8 @@ class IzinKeluar extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function baak()
+    {
+        return $this->belongsTo(Baak::class);
+    }
 }
